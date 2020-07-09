@@ -3,12 +3,35 @@ var router = express.Router();
 const pool = require('../pool/pool');
 
 /* GET home page. */
-router.get('/', async (req, res) => {
-    const promisePool = pool.promise();
-    const persons = [rows] = await promisePool.query("SELECT id FROM personnel");
-    const profiles = [rows] = await promisePool.query("SELECT id FROM profiles");
-    console.log([persons[0], profiles[0]])
-    res.render('register', { persons: persons[0], profiles: profiles[0] })
+router.get('/', (req, res) => {
+    if (req.session.success) {
+        res.status(200).redirect("/")
+    } else {
+        req.session.success = false;
+        res.status(200).render("register.hbs", {
+            title: "Авторизация"
+        })
+    }
+})
+
+router.post('/', (req, res) => {
+    console.log(req.body)
+    res.redirect('/')
+    // pool.query(
+    //     `SELECT * FROM profiles
+    //          WHERE email='${req.body.email}'
+    //          AND password='${req.body.password}'
+    //         `,
+    //     function (err, data) {
+    //         console.log(data.length)
+    //         if (err || !data.length) {
+    //             req.session.success = false;
+    //             res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
+    //         } else {
+    //             req.session.success = true;
+    //             res.status(200).redirect("/")
+    //         }
+    //     });
 })
 
 module.exports = router;

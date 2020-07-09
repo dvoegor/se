@@ -20,7 +20,7 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="hide-on-med-and-down left">
             <li><a href="/"><i class="material-icons left">home</i>Главная</a></li>
-            <li><a href=""><i class="material-icons left">apps</i>Товары</a></li>
+            <li><a href="/products"><i class="material-icons left">apps</i>Товары</a></li>
             <li><a href=""><i class="material-icons left">contacts</i>Контакты</a></li>
             <li><a href=""><i class="material-icons left">shopping_basket</i>Корзина</a></li>
             <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
@@ -38,76 +38,67 @@
 
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/"><i class="material-icons left">home</i>Главная</a></li>
-    <li><a href=""><i class="material-icons left">apps</i>Товары</a></li>
+    <li><a href="/products"><i class="material-icons left">apps</i>Товары</a></li>
     <li><a href=""><i class="material-icons left">contacts</i>Контакты</a></li>
     <li><a href=""><i class="material-icons left">shopping_basket</i>Корзина</a></li>
     <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
     <li class="disabled"><a>+7(912)999-99-99</a></li>
 </ul>
-<br><br>
-<div class="container">
-    <div class="row">
-        <form class="col s12" method="post" action="/login">
-            <div class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" name="email" class="validate" required>
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">lock_outline</i>
-                    <input id="password" type="password" name="password" class="validate" required>
-                    <label for="password">Пароль</label>
-                </div>
-            </div>
-<!--            <div class="row">-->
-<!--                <div class="input-field col s6">-->
-<!--                    <i class="material-icons prefix">tag_faces</i>-->
-<!--                    <input id="icon_prefix" type="text" class="validate">-->
-<!--                    <label for="icon_prefix">Имя</label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--                <div class="input-field col s6">-->
-<!--                    <i class="material-icons prefix">phone</i>-->
-<!--                    <input id="icon_telephone" type="tel" class="validate">-->
-<!--                    <label for="icon_telephone">Телефон</label>-->
-<!--                </div>-->
-<!--            </div>-->
-            <div class="row ml-2">
-                <a href="/register" class="waves-effect waves-light btn-small blue darken-1"><i class="material-icons left">person_add</i>Регистрация</a>
-            </div>
-            <button type="submit" class="btn btn-success right">Войти</button>
-        </form>
-    </div>
-</div>
+<div class="container center">
+    <br>
+    {{#each product}}
+        <img src="{{this.image}}">
+        <h1 class="card-title">{{this.name}}</h1>
+        <p class="card-text">Описание: {{this.description}}</p>
+        <p class="card-text">Состав: {{this.composition}}</p>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>Ккал/100г</th>
+                <th>Белки</th>
+                <th>Жиры</th>
+                <th>Углеводы</th>
+            </tr>
+            </thead>
 
-<!--<footer class="page-footer grey darken-4 center">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col l6 s12">-->
-<!--                <h5 class="white-text">Footer Content</h5>-->
-<!--                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>-->
-<!--            </div>-->
-<!--            <div class="col l4 offset-l2 s12">-->
-<!--                <h5 class="white-text">Links</h5>-->
-<!--                <ul>-->
-<!--                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>-->
-<!--                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>-->
-<!--                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>-->
-<!--                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="footer-copyright">-->
-<!--        <div class="container">-->
-<!--            © 2020 Двоеглазов Г.И., 171-331-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</footer>-->
+            <tbody>
+            <tr>
+                <td>{{this.kcal}}</td>
+                <td>{{this.proteins}} г.</td>
+                <td>{{this.fats}} г.</td>
+                <td>{{this.carbohydrates}} г.</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <h2 class="card-title">Цена: {{this.price}} Р</h2>
+    {{/each}}
+</div>
+<br>
+<footer class="page-footer grey darken-4 center">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2020 Двоеглазов Г.И., 171-331
+        </div>
+    </div>
+</footer>
 <!--JavaScript at end of body for optimized loading-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

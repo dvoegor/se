@@ -5,10 +5,12 @@ const pool = require('../pool/pool');
 /* GET home page. */
 router.get('/', async (req, res) => {
     const promisePool = pool.promise();
-    const persons = [rows] = await promisePool.query("SELECT id FROM personnel");
+    const products = [err, rows] = await promisePool.query("SELECT * FROM products");
     const profiles = [rows] = await promisePool.query("SELECT id FROM profiles");
-    // console.log([persons[0], profiles[0]])
-    res.render('index', { persons: persons[0], profiles: profiles[0] })
+    console.log([products[0]])
+    res.render('products', { products: products[0] })
 })
+
+
 
 module.exports = router;
