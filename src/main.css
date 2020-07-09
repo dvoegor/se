@@ -6,4 +6,13 @@
   height: 32px;
 }
 
+nav a {
+  text-decoration: none !important;
+  color: white !important;
+}
+nav li a {
+  text-decoration: none !important;
+  color: white !important;
+}
+
 /*# sourceMappingURL=main.css.map */

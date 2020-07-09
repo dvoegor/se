@@ -4,3 +4,25 @@
 .logo-img {
   height: 32px;
 }
+//.food-img {
+//  height: 256px!important;
+//  width: 256px!important;
+//}
+
+//nav li a {
+//  text-decoration: none!important;
+//  color: white!important;
+//}
+
+nav {
+  a {
+    text-decoration: none!important;
+    color: white!important;
+  }
+  li {
+    a {
+      text-decoration: none!important;
+      color: white!important;
+    }
+  }
+}
