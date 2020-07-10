@@ -11,7 +11,9 @@ router.get('/', async (req, res) => {
     if (id.length === 0) {
         res.render('cart', { alert: 'В вашей корзине нет товаров' })
     } else {
+        console.log(req.session.userId)
         const products = [err, rows] = await promisePool.query(`SELECT * FROM products WHERE products.id in (${id})`);
+        const user = [rows] = await promisePool.query(`SELECT * FROM users WHERE id = ${req.session.userId}`);
         // const ids = [err, rows] = await promisePool.query(`SELECT id FROM products WHERE products.id in (${id})`);
         let productsCounts = products[0];
         // session.prodCounts.push({id: req.body.id, count: count + 1})
@@ -37,7 +39,8 @@ router.get('/', async (req, res) => {
         for (let i = 0; i < session.prodCounts.length; i++) {
             session.allPrice += session.prodCounts[i][0].newPrice
         }
-        res.render('cart', { products: session.prodCounts, allPrice: session.allPrice })
+        console.log(user[0][0].name)
+        res.render('cart', { products: session.prodCounts, allPrice: session.allPrice, user: user[0][0], success: req.session.success })
 
     }
 })
@@ -73,10 +76,45 @@ router.post('/delete/:id', (req, res) => {
 
 })
 
-router.post('/order', (req, res) => {
-    console.log(session.prodCounts)
-    console.log(session.allPrice)
-    res.redirect('/cart')
+router.post('/order', async (req, res) => {
+    const promisePool = pool.promise();
+    const orders = [rows] = await promisePool.query(`INSERT INTO orders (name,tel,street,home,flat,allPrice,is_closed)
+                VALUES (
+                '${req.body.name}',
+                '${req.body.tel}',
+                '${req.body.street}',
+                '${req.body.home}',
+                '${req.body.flat}',
+                '${req.body.allPrice}',
+                '0')
+                `);
+    console.log(orders[0].insertId)
+    for (let i = 0; i < session.prodCounts.length; i++) {
+        await promisePool.query(`INSERT INTO order_part (order_id,product_id,count)
+                VALUES (
+                '${orders[0].insertId}',
+                '${session.prodCounts[i][0].id}',
+                '${session.prodCounts[i][0].count}')
+                `);
+        // session.allPrice += session.prodCounts[i][0].newPrice
+    }
+    // console.log(req.body)
+    // console.log(session.prodCounts)
+    // console.log(session.allPrice)
+    res.render('ordered', {
+        products: session.prodCounts,
+        // allPrice: session.allPrice,
+        name: req.body.name,
+        tel: req.body.tel,
+        street: req.body.street,
+        home: req.body.home,
+        flat: req.body.flat,
+        allPrice: req.body.allPrice
+    })
+    session.prodCounts = [{}]
+    session.allPrice = 0
+    session.products = []
+    session.item = undefined
 })
 
 module.exports = router;

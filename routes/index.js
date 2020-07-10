@@ -8,11 +8,11 @@ session.products = [];
 /* GET home page. */
 router.get('/', async (req, res) => {
     console.log(session.products)
-    const promisePool = pool.promise();
-    const persons = [rows] = await promisePool.query("SELECT id FROM personnel");
-    const profiles = [rows] = await promisePool.query("SELECT id FROM profiles");
-    // console.log([persons[0], profiles[0]])
-    res.render('index', { persons: persons[0], profiles: profiles[0] })
+    // const promisePool = pool.promise();
+    // const persons = [rows] = await promisePool.query("SELECT id FROM personnel");
+    // const profiles = [rows] = await promisePool.query("SELECT id FROM profiles");
+    // // console.log([persons[0], profiles[0]])
+    res.render('index', { success: req.session.success, userName: req.session.name})
 })
 
 router.post('/find', async (req, res) => {

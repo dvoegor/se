@@ -16,22 +16,35 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log(req.body)
-    res.redirect('/')
-    // pool.query(
-    //     `SELECT * FROM profiles
-    //          WHERE email='${req.body.email}'
-    //          AND password='${req.body.password}'
-    //         `,
-    //     function (err, data) {
-    //         console.log(data.length)
-    //         if (err || !data.length) {
-    //             req.session.success = false;
-    //             res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
-    //         } else {
-    //             req.session.success = true;
-    //             res.status(200).redirect("/")
-    //         }
-    //     });
+    // res.redirect('/')
+    // const promisePool = pool.promise();
+    // const orders = [rows] = await promisePool.query(`INSERT INTO users (email,password,name,tel)
+    //             VALUES (
+    //             '${req.body.email}',
+    //             '${req.body.password}',
+    //             '${req.body.name}',
+    //             '${req.body.tel}')
+    //             `);
+    pool.query(
+        `INSERT INTO users (email,password,name,tel,is_operator,is_admin)
+                VALUES (
+                '${req.body.email}',
+                '${req.body.password}',
+                '${req.body.name}',
+                '${req.body.tel}',
+                0,
+                0)
+                `,
+        function (err, data) {
+            console.log(data.length)
+            if (err || !data.length) {
+                req.session.success = false;
+                res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
+            } else {
+                req.session.success = true;
+                res.status(200).redirect("/")
+            }
+        });
 })
 
 module.exports = router;

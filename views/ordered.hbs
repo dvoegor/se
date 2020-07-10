@@ -1,0 +1,32 @@
+<h1>Spun</h1>
+<h2>Имя: {{name}}</h2>
+<h2>Телефон: {{tel}}</h2>
+<h2>Улица: {{street}}</h2>
+<h2>Дом: {{home}}</h2>
+<h2>Квартира: {{flat}}</h2>
+<br>
+<table class="centered">
+    <thead>
+    <tr>
+        <th>Продукт</th>
+        <th>Количество</th>
+        <th>Цена</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each products}}
+        {{#each this}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.count}}</td>
+                <td>{{this.newPrice}} Р</td>
+            </tr>
+        {{/each}}
+    {{/each}}
+    </tbody>
+</table>
+<br>
+<h2>Итого: {{allPrice}} Р</h2>
+<br>
+<br>
+<a href="/">На главную</a>

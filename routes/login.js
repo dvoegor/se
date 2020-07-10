@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const pool = require('../pool/pool');
+const session = require('express-session');
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -15,23 +16,24 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    console.log(req.body)
-    res.redirect('/')
-    // pool.query(
-    //     `SELECT * FROM profiles
-    //          WHERE email='${req.body.email}'
-    //          AND password='${req.body.password}'
-    //         `,
-    //     function (err, data) {
-    //         console.log(data.length)
-    //         if (err || !data.length) {
-    //             req.session.success = false;
-    //             res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
-    //         } else {
-    //             req.session.success = true;
-    //             res.status(200).redirect("/")
-    //         }
-    //     });
+    // console.log(req.body)
+    pool.query(
+        `SELECT * FROM users
+             WHERE email='${req.body.email}'
+             AND password='${req.body.password}'
+            `,
+        function (err, data) {
+            console.log(data.length)
+            if (err || !data.length) {
+                req.session.success = false;
+                res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
+            } else {
+                req.session.success = true;
+                req.session.name = data[0].name
+                req.session.userId = data[0].id
+                res.status(200).redirect("/")
+            }
+        });
 })
 
 module.exports = router;
