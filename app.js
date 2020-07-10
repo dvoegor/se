@@ -13,6 +13,7 @@ var productRouter = require('./routes/product');
 var cartRouter = require('./routes/cart');
 var operatorRouter = require('./routes/operator');
 var adminRouter = require('./routes/admin');
+var contactsRouter = require('./routes/contacts');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 app.use('/operator', operatorRouter);
 app.use('/admin', adminRouter);
+app.use('/contacts', contactsRouter);
 
 app.post('/logout', (req, res) => {
   req.session.success = false;

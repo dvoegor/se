@@ -23,12 +23,17 @@
             <li><a href="/products"><i class="material-icons left">apps</i>Товары</a></li>
             <li><a href=""><i class="material-icons left">contacts</i>Контакты</a></li>
             <li><a href="/cart"><i class="material-icons left">shopping_basket</i>Корзина</a></li>
-            <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
+            {{#if success}}
+                <li><a><i class="material-icons left">person_outline</i>{{userName}}</a></li>
+            {{else}}
+                <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
+            {{/if}}
+            <!--            <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>-->
             <li class="disabled"><a>+7(912)999-99-99</a></li>
         </ul>
         <form method="post" action="/find">
             <div class="input-field left">
-                <input id="search" type="search" placeholder="Поиск" required>
+                <input id="search" type="search" placeholder="Поиск" name="find" required>
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
             </div>
@@ -86,16 +91,16 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                <h5 class="white-text">О сайте</h5>
+                <p class="grey-text text-lighten-4">Spun - сайт доставки домашней еды.</p>
             </div>
             <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
+                <h5 class="white-text">Ссылки</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Главная</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Контакты</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Товары</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Корзина</a></li>
                 </ul>
             </div>
         </div>

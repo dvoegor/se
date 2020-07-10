@@ -9,7 +9,7 @@ router.get('/:id', async (req, res) => {
     console.log(id)
     const product = [err, rows] = await promisePool.query(`SELECT * FROM products WHERE products.id=${id}`);
     console.log([product[0]])
-    res.render('product', { product: product[0] })
+    res.render('product', { success: req.session.success, userName: req.session.name,product: product[0] })
 })
 
 

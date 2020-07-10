@@ -13,7 +13,10 @@ router.get('/', async (req, res) => {
     } else {
         console.log(req.session.userId)
         const products = [err, rows] = await promisePool.query(`SELECT * FROM products WHERE products.id in (${id})`);
-        const user = [rows] = await promisePool.query(`SELECT * FROM users WHERE id = ${req.session.userId}`);
+        let user;
+        if (req.session.userId) {
+            user = [rows] = await promisePool.query(`SELECT * FROM users WHERE id = ${req.session.userId}`);
+        }
         // const ids = [err, rows] = await promisePool.query(`SELECT id FROM products WHERE products.id in (${id})`);
         let productsCounts = products[0];
         // session.prodCounts.push({id: req.body.id, count: count + 1})
@@ -39,8 +42,12 @@ router.get('/', async (req, res) => {
         for (let i = 0; i < session.prodCounts.length; i++) {
             session.allPrice += session.prodCounts[i][0].newPrice
         }
-        console.log(user[0][0].name)
-        res.render('cart', { products: session.prodCounts, allPrice: session.allPrice, user: user[0][0], success: req.session.success })
+        // console.log(user[0][0].name)
+        if (req.session.userId) {
+            res.render('cart', { products: session.prodCounts, allPrice: session.allPrice, user: user[0][0], success: req.session.success, userName: req.session.name })
+        } else {
+            res.render('cart', { products: session.prodCounts, allPrice: session.allPrice, success: req.session.success })
+        }
 
     }
 })

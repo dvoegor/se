@@ -22,13 +22,18 @@
             <li><a href="/"><i class="material-icons left">home</i>Главная</a></li>
             <li><a href="/products"><i class="material-icons left">apps</i>Товары</a></li>
             <li><a href=""><i class="material-icons left">contacts</i>Контакты</a></li>
-            <li><a href=""><i class="material-icons left">shopping_basket</i>Корзина</a></li>
-            <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
+            <li><a href="/cart"><i class="material-icons left">shopping_basket</i>Корзина</a></li>
+            {{#if success}}
+                <li><a><i class="material-icons left">person_outline</i>{{userName}}</a></li>
+            {{else}}
+                <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
+            {{/if}}
+            <!--            <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>-->
             <li class="disabled"><a>+7(912)999-99-99</a></li>
         </ul>
         <form method="post" action="/find">
             <div class="input-field left">
-                <input id="search" type="search" placeholder="Поиск" required>
+                <input id="search" type="search" placeholder="Поиск" name="find" required>
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
             </div>
