@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    // res.session.operator = 0
     // console.log(req.body)
     pool.query(
         `SELECT * FROM users
@@ -28,9 +29,12 @@ router.post('/', (req, res) => {
                 req.session.success = false;
                 res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
             } else {
+                // console.log(data[0].is_operator)
                 req.session.success = true;
                 req.session.name = data[0].name
                 req.session.userId = data[0].id
+                session.operator = data[0].is_operator
+                session.admin = data[0].is_admin
                 res.status(200).redirect("/")
             }
         });
