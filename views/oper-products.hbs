@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <br>
+    <a href="/operator/products/create" class="btn btn-primary">Создать товар</a>
+    <br>
+    <br>
+    {{#each products}}
+        <br>
+        <form method="post" action="/add">
+            <input id="id" name="id" type="text" value="{{this.id}}" hidden>
+            <img src="{{this.image}}">
+            <h1 class="card-title">{{this.name}}</h1>
+            <p class="card-text">Описание: {{this.description}}</p>
+            <p class="card-text">Состав: {{this.composition}}</p>
+            <table class="centered">
+                <thead>
+                <tr>
+                    <th>Ккал/100г</th>
+                    <th>Белки</th>
+                    <th>Жиры</th>
+                    <th>Углеводы</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>{{this.kcal}}</td>
+                    <td>{{this.proteins}} г.</td>
+                    <td>{{this.fats}} г.</td>
+                    <td>{{this.carbohydrates}} г.</td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <h2 class="card-title">Цена: {{this.price}} Р</h2>
+            <br>
+            <a href="/operator/products/edit/{{this.id}}" class="btn btn-info">Изменить товар</a>
+            <a href="/operator/products/delete/{{this.id}}" class="btn btn-danger">Удалить товар</a>
+        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+    {{/each}}
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

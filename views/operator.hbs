@@ -12,6 +12,16 @@
 </head>
 <body>
 <div class="container">
+    <br>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Товары</h5>
+<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+            <a href="/operator/products" class="btn btn-primary">Перейти к товарам</a>
+        </div>
+    </div>
+    <br>
+    <br>
 {{#each orders}}
     <br>
     <form method="post" action="operator/close/{{this.id}}">
