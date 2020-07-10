@@ -6,7 +6,8 @@ const pool = require('../pool/pool');
 router.get('/:id', async (req, res) => {
     const promisePool = pool.promise();
     const id = req.params.id
-    const product = [err, rows] = await promisePool.query(`SELECT * FROM products WHERE products.id=1`);
+    console.log(id)
+    const product = [err, rows] = await promisePool.query(`SELECT * FROM products WHERE products.id=${id}`);
     console.log([product[0]])
     res.render('product', { product: product[0] })
 })

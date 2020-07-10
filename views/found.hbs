@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!--Let browser know website is optimized for mobile-->
-<!--    <link rel="stylesheet" href="main.css">-->
+    <link rel="stylesheet" href="main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -26,7 +26,7 @@
             <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
             <li class="disabled"><a>+7(912)999-99-99</a></li>
         </ul>
-        <form method="post" action="/find">
+        <form>
             <div class="input-field left">
                 <input id="search" type="search" placeholder="Поиск" required>
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -44,6 +44,15 @@
     <li><a href="/login"><i class="material-icons left">person_outline</i>Войти</a></li>
     <li class="disabled"><a>+7(912)999-99-99</a></li>
 </ul>
+<div class="parallax-container">
+    <!--    <div class="row center">-->
+    <!--        <div class="col s4 blue lighten-5">6-columns (one-half)</div>-->
+    <!--        <div class="col s4 blue lighten-5">6-columns (one-half)</div>-->
+    <!--        <div class="col s4 blue lighten-5">6-columns (one-half)</div>-->
+    <!--    </div>-->
+    <div class="parallax">
+        <img src="images/food.jpg"></div>
+</div>
 <br>
 <!--<div class="section white">-->
 <!--    <div class="row container">-->
@@ -55,40 +64,28 @@
 <!--    <div class="col s4">6-columns (one-half)</div>-->
 <!--    <div class="col s4">6-columns (one-half)</div>-->
 <!--</div>-->
-<div class="container center">
-    <br>
-    {{#each product}}
-    <form method="post" action="/add">
-        <input id="id" name="id" type="text" value="{{this.id}}" hidden>
-        <img src="{{this.image}}">
-        <h1 class="card-title">{{this.name}}</h1>
-        <p class="card-text">Описание: {{this.description}}</p>
-        <p class="card-text">Состав: {{this.composition}}</p>
-        <table class="centered">
-            <thead>
-            <tr>
-                <th>Ккал/100г</th>
-                <th>Белки</th>
-                <th>Жиры</th>
-                <th>Углеводы</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr>
-                <td>{{this.kcal}}</td>
-                <td>{{this.proteins}} г.</td>
-                <td>{{this.fats}} г.</td>
-                <td>{{this.carbohydrates}} г.</td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-        <h2 class="card-title">Цена: {{this.price}} Р</h2>
-    </form>
+<div class="container">
+    <div class="section white">
+        <div class="row container">
+            <h2 class="header">Найденные товары:</h2>
+        </div>
+    </div>
+    {{#each found}}
+        <div class="row row-cols-1 row-cols-md-3 center">
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <img src="{{this.image}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <a href="product/{{this.id}}" class="waves-effect waves-light btn blue lighten-4"><i class="material-icons left">info_outline</i>Подробнее</a>
+                        <a class="waves-effect waves-light btn pink lighten-4"><i class="material-icons left">shopping_basket</i>Добавить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/each}}
 </div>
-<br>
 <footer class="page-footer grey darken-4 center">
     <div class="container">
         <div class="row">
