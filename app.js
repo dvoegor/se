@@ -36,7 +36,7 @@ app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 app.use('/operator', operatorRouter);
 app.use('/admin', adminRouter);
-app.use('/contacts', contactsRouter);
+// app.use('/contacts', contactsRouter);
 
 app.post('/logout', (req, res) => {
   req.session.success = false;
