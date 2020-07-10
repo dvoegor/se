@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const products = [err, rows] = await promisePool.query("SELECT * FROM products");
     const categories = [err, rows] = await promisePool.query(`SELECT * FROM categories`);
     // console.log([products[0]])
-    res.render('products', { products: products[0], categories: categories[0] })
+    res.render('products', { products: products[0], categories: categories[0], success: req.session.success, userName: req.session.name })
 })
 
 router.post('/', async (req, res) => {

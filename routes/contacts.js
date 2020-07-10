@@ -10,5 +10,5 @@ router.get('/', async (req, res) => {
     const products = [rows] = await promisePool.query("SELECT * FROM products order by id desc limit 3;");
     // const profiles = [rows] = await promisePool.query("SELECT id FROM profiles");
     // // console.log([persons[0], profiles[0]])
-    res.render('index', { success: req.session.success, userName: req.session.name, products: products[0]})
+    res.render('contacts', { success: req.session.success, userName: req.session.name, products: products[0]})
 })

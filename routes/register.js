@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const pool = require('../pool/pool');
+const session = require('express-session');
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
     }
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     console.log(req.body)
     // res.redirect('/')
     // const promisePool = pool.promise();
@@ -25,8 +26,8 @@ router.post('/', (req, res) => {
     //             '${req.body.name}',
     //             '${req.body.tel}')
     //             `);
-    pool.query(
-        `INSERT INTO users (email,password,name,tel,is_operator,is_admin)
+    const promisePool = pool.promise();
+    const newUser = [rows] = await promisePool.query(`INSERT INTO users (email,password,name,tel,is_operator,is_admin)
                 VALUES (
                 '${req.body.email}',
                 '${req.body.password}',
@@ -34,16 +35,18 @@ router.post('/', (req, res) => {
                 '${req.body.tel}',
                 0,
                 0)
-                `,
+                `);
+    console.log(newUser[0].insertId)
+    pool.query(
+        `SELECT * FROM users where id = ${newUser[0].insertId}`,
         function (err, data) {
-            console.log(data.length)
-            if (err || !data.length) {
-                req.session.success = false;
-                res.status(500).render('error',{message: 'Ошибка авторизации', status: 'error'})
-            } else {
-                req.session.success = true;
-                res.status(200).redirect("/")
-            }
+            console.log(data[0])
+            req.session.success = true;
+            req.session.name = data[0].name
+            req.session.userId = data[0].id
+            session.operator = data[0].is_operator
+            session.admin = data[0].is_admin
+            res.status(200).redirect("/")
         });
 })
 
